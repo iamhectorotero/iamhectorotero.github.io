@@ -1,6 +1,6 @@
 ---
 layout: post
-title: My introduction to window functions
+title: My introduction to SQL window functions
 ---
 *Last Monday, I started working @ Opinary (Berlin) as a Data Scientist. Wednesday, I was introduced
 to MySQL / BigQuery window functions. They're likely to be one of the most useful (and one of
