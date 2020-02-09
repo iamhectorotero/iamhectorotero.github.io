@@ -30,7 +30,7 @@ This is all good and fine and would result in something like this:
 |name, age, salary, department, is_best_paid_department_employee |
 |Brian, 24, 1000, Sales, False <br>Jonathan, 32, 2800, Engineering, False <br>Melissa, 40, 2500, Engineering, False <br> John, 25, 3000, Engineering, True<br>Lucy, 30, 2800, Sales, True<br> James, 28, 1500, Marketing, True|
 
-Now, imagine ask your colleague asks you this (artificial) follow-up question: "Oh, can you calculate
+Now, imagine your colleague asks you this (artificial) follow-up question: "Oh, can you calculate
 the second best paid employees?". You think "Well, I could remove best paid employees and repeat the query again.
 It's not super nice, but it should work". Your invested colleague continues and asks:
 "Actually, can you tell me how each employee ranks in their department?". That to me, sounded very
