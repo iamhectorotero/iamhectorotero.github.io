@@ -56,7 +56,7 @@ which would return:
 
 ROW_NUMBER is a non-aggregate window function as it assigns an individual value to the
 rows that have been grouped (_partitioned_) as oppossed to aggregate ones using GROUP BY that are
-used to calculate summary statistics (max, min, count, etc) over the different groups.
+used to calculate summary statistics (max, min, count, etc) over the different groups. [Here's a link](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html) to other non-aggregate window functions and what they do!
 
 ## EXTRA: What if several employees earned the same maximum amount?
 Well, in this case, ROW_NUMBER would assign number 1 to an arbitrary employee and subsequent numbers
