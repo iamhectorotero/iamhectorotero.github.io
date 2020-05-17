@@ -27,8 +27,6 @@ FROM (
 
 When we want to calculate an aggregate statistic for different subgroups of data, we normally use GROUP BY and an already implemented function to compute the desired function over the field we select. For example, if we wanted to calculate the average height per sex from a table named `height_data`, we simply do:
 
-This query will return one row per sex and its corresponding average height. In other words, `AVG` **computes one value for each group defined by the GROUP BY function**. Functions that like `AVG` return one value per group of rows (such as `MAX`, `MIN`, `SUM`, etc) are called aggregate functions. 
-
 ```sql
 SELECT
   sex,
@@ -38,6 +36,8 @@ FROM
 GROUP BY
   sex
 ```
+
+This query will return one row per sex and its corresponding average height. In other words, `AVG` **computes one value for each group defined by the GROUP BY function**. Functions that like `AVG` return one value per group of rows (such as `MAX`, `MIN`, `SUM`, etc) are called aggregate functions. 
 
 After a Google search you can find out that to calculate the median in BigQuery you have to use `PERCENTILE_CONT(x, 0.5)` where x is the field we want to calculate the median over and 0.5 indicates the 50th percentile. If you don't read any further, what you would try to do is compute the median per sex using `SELECT sex, PERCENTILE_CONT(height, 0.5) as median_height FROM height_data GROUP BY sex`. However, this doesn't work!
 
