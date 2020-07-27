@@ -34,7 +34,7 @@ df["German"] = embed("Ich bin Héctor und arbeite als Datenwissenschaftler")[0]
 df.iloc[:20].plot(kind="bar")
 ```
 
-As we can see in the plot below, those positions in the embeddings that are high for one language
+As we can see in the plot below, those positions in the embeddings that are large for one language
 are also large for the other two languages. The correlations among these embeddings are 
 higher than 0.9.
 
@@ -111,7 +111,7 @@ X_test = [embed(x)[0] for x in tqdm(X_test)]
 
 One way of predicting is to compute pairwise similarities between the test articles
 and the training articles and choose the most similar article's class as the answer. 
-One example of a silarity metric is `cosine_similarity`, which comes implemented in `scikit-learn`:
+One example of a similarity metric is `cosine_similarity`, which comes implemented in `scikit-learn`:
 ```python
 from sklearn.metrics.pairwise import cosine_similarity
 
@@ -157,17 +157,8 @@ S(A, B) = exp(-D(A, B) x gamma) # where gamma is a chosen constant
 Note: The similarity equivalent of the Manhattan distance is also referred to as Laplacian kernel. 
 
 # Calculating the accuracy for the alternatives
-We can simply plug in the similarity metric in the same way as before:
-```python
-def get_accuracy_for_similarity_metric(similarity_metric):
-  similarities = similarity_metric(X_test, X_train)
-  most_similar_articles = np.argmax(similarities, axis=1)
-  most_similar_articles_classes = [Y_train[i] for i in most_similar_articles]
-  return np.mean(np.array(most_similar_articles_classes) == np.array(Y_test))
-```
-
-To define the distances and correlation metrics as a pairwise metric usable in the same way, we can
-do:
+To define the distances and correlation metrics as a pairwise metric usable in the same way
+scikit-learn does, we can do:
 
 ```python
 manhattan_similarity = lambda X, Y: np.exp(-manhattan_distances(X, Y))
@@ -176,7 +167,16 @@ pearson_correlation = lambda X, Y: [[np.corrcoef(x, y)[0][1] for y in Y] for x i
 spearman_correlation = lambda X, Y: [[spearmanr(x, y)[0] for y in Y] for x in X]
 ```
 
-And then, we can run a comparison among metrics:
+Then, we can simply plug in the chosen similarity metric in the same way as before:
+```python
+def get_accuracy_for_similarity_metric(similarity_metric):
+  similarities = similarity_metric(X_test, X_train)
+  most_similar_articles = np.argmax(similarities, axis=1)
+  most_similar_articles_classes = [Y_train[i] for i in most_similar_articles]
+  return np.mean(np.array(most_similar_articles_classes) == np.array(Y_test))
+```
+
+With this, we can run a comparison among metrics:
 ```python
 labels = ["Manhattan Similarity", "Euclidean Similarity", "Linear Kernel", "Cosine Similarity",
           "RBF Kernel", "Pearson Correlation", "Spearman's Rank Correlation"]
@@ -199,13 +199,13 @@ Pearson Correlation: 52.22%
 Spearman's Rank Correlation: 54.44%
 ```
 
-Manhattan Similarity (aka Laplacian Kernel) seems to work best in this reduced dataset. However,
-more surprisingly:
+Manhattan Similarity (aka Laplacian Kernel) seems to work marginally better in this reduced dataset.
+However, more surprisingly:
 ### 4/7 metrics tested (Euclidean, Linear Kernel, Cosine Similarity and RBF Kernel) have the exact same accuracy. Why is this? Well, math.
 
 # Equivalence / proportionality between similarity metrics
 
-In one way or another, these apparently different metrics are equivalent to each other. 
+In one way or another, these apparently different metrics are equivalent to each other.
 
 Let's start off with Linear Kernel and Cosine similarity. A Linear Kernel is simply the inner
 product between two vectors. The cosine similarity, is a normalised version of this product.
