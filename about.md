@@ -4,8 +4,9 @@ title: About
 permalink: /about/
 ---
 
-- Computer Scientist. Graduated from UC3M with a year abroad in the University of California, Irvine.
+- Data Scientist @ [Opinary](https://www.opinary.com)
+- MSc in Artificial Intelligence @ The University of Edinburgh
+- Computer Science: Universidad Carlos III, Madrid and University of California, Irvine.
 - In love with Artificial Intelligence and, more particularly, with Reinforcement Learning.
-- Data Scientist @ [Intelygenz](https://www.intelygenz.es/)
 
 
