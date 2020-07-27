@@ -112,7 +112,7 @@ X_test = [embed(x)[0] for x in tqdm(X_test)]
 One way of predicting is to compute pairwise similarities between the test articles
 and the training articles and choose the most similar article's class as the answer. 
 One example of a silarity metric is `cosine_similarity`, which comes implemented in `scikit-learn`:
-```
+```python
 from sklearn.metrics.pairwise import cosine_similarity
 
 similarities = cosine_similarity(X_test, X_train) #shape: (#Test articles, #Train articles)
@@ -120,7 +120,7 @@ most_similar_articles = np.argmax(similarities, axis=1) # shape (#Test articles)
 ```
 
 Then we obtain the classes that correspond to the most similar articles and check our accuracy:
-```
+```python
 most_similar_articles_classes = [Y_train[i] for i in most_similar_articles]
 accuracy = np.mean(np.array(most_similar_articles_classes) == np.array(Y_test))
 ```
